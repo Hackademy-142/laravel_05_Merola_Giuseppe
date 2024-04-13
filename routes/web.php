@@ -16,7 +16,7 @@ Route::get('manga/genere', [MangaController::class , 'mangaIndex'])->name('manga
 
 Route::get('anime/animeID/{id}', [AnimeController::class, 'animeById'])->name('animeID');
 
-Route::get('anime/mangaID/{id}', [MangaController::class, 'mangaById'])->name('mangaID');
+Route::get('manga/mangaID/{id}', [MangaController::class, 'mangaById'])->name('mangaID');
 
-Route::get('anime/animeID/dettaglio/{id}', [AnimeController::class, 'dettaglio'])->name('animeDettaglio');
+Route::get("anime/dettaglio/{id}",[AnimeController::class,"dettaglio"])->name("animeDettaglio");
 

@@ -10,9 +10,7 @@
                title="{{$anime['title']}}"
                sinossi="{{$anime['sinossi']}}"
                punteggio="{{$anime['punteggio']}}">
-               
-               <a class="btn btn-primary" href="">View all</a>
-
+               <a class="btn btn-primary" href="{{route('animeDettaglio', ['id' =>$anime['id']])}}">View all</a>
                </x-card>
             </div>
             @endforeach

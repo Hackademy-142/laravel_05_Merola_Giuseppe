@@ -24,6 +24,7 @@ class AnimeController extends Controller
 
         $resultMap = Arr::map($result, function($el){
             return [
+                'id' => $el['mal_id'],
                 'img' => $el['images']['webp']['image_url'],
                 'title' => $el['title'],
                 'sinossi' => $el['synopsis'],
@@ -34,22 +35,27 @@ class AnimeController extends Controller
         return view('anime/animeID', ['animes' => $resultMap]);
     }
 
-    public function dettaglio($id){
 
-        $endpoint = 'https://api.jikan.moe/v4/anime';
+    function dettaglio($id)
+    {
+        $result = "https://api.jikan.moe/v4/anime";
 
-        $result = Http::get($endpoint, ['generi' => $id])['data'];
+        $response = Http::get($result)["data"];
 
-        $resultMap = Arr::map($result, function($el){
-            return [
-                'id' => $el['mal_id'],
-                'img' => $el['images']['webp']['image_url'],
-                'title' => $el['title'],
-                'sinossi' => $el['synopsis'],
-                'punteggio' => $el['score']
+        $animeData = collect($response)->firstWhere('mal_id', $id);
+
+        if ($animeData) {
+            $anime = [
+                "img" => $animeData["images"]["webp"]["image_url"],
+                "title" => $animeData["title"],
+                "sinossi" => $animeData["synopsis"],
+                "punteggio" => $animeData["score"],
+                "id" => $animeData["mal_id"],
             ];
-        });
 
-        return view('anime/animeID/dettaglio', ['animes' => $resultMap]);
+            return view("anime/dettaglio", ["anime" => $anime]);
+        }
     }
+
 }
+

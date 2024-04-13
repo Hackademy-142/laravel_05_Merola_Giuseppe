@@ -11,7 +11,6 @@
         <p class="text-truncate">{{$sinossi}}</p>
       </div>
       <div class="col-12">
-        {{-- <a class="btn btn-primary" href="">View all</a> --}}
         {{$slot}}
       </div>
       <div class="col-12 mt-5 position-absolute punteggio">
